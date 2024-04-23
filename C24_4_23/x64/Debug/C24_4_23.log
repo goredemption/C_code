@@ -1,0 +1,3 @@
+﻿  test.c
+C:\Users\18247\source\repos\C24_4_23\C24_4_23\test.c(162,1): warning C4715: “compare”: 不是所有的控件路径都返回值
+  C24_4_23.vcxproj -> C:\Users\18247\source\repos\C24_4_23\x64\Debug\C24_4_23.exe
