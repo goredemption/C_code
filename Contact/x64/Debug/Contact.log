@@ -1,5 +1,4 @@
 ﻿  contact.c
-  test.c
-C:\Users\18247\source\repos\Contact\Contact\test.c(9,2): warning C4013: “print”未定义；假设外部返回 int
-  正在生成代码...
+C:\Users\18247\source\repos\Contact\Contact\contact.c(142,56): warning C4090: “函数”: 不同的“const”限定符
+C:\Users\18247\source\repos\Contact\Contact\contact.c(142,49): warning C4113: “int (__cdecl *)(void *,void *)”和“_CoreCrtNonSecureSearchSortCompareFunction”的参数列表不同
   Contact.vcxproj -> C:\Users\18247\source\repos\Contact\x64\Debug\Contact.exe

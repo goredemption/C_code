@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
+#include<string.h>
 struct contact {
 	struct address* book;
 	int size;
@@ -17,4 +18,8 @@ struct address {
 void initial(struct contact* ct);
 void insert(struct contact* ct);
 void destroy(struct contact* ct);
-void erase(struct contact* ct, int n);
+void erase(struct contact* ct);
+void find(struct contact* ct);
+void sort(struct contact* ct);
+void modify(struct contact* ct);
+void menu();
