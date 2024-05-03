@@ -58,7 +58,22 @@ void test4() {
 	SListPrint(phead);
 	SListDestroy(&phead);
 }
+void test5() {
+	SListNode* phead = NULL;
+	SListInsert(&phead, NULL, 3);
+	SListPrint(phead);
+	SListInsert(&phead, SListFind(phead, 3), 7);
+	SListPrint(phead);
+	SListPushBack(&phead, 6);
+	SListPushBack(&phead, 8);
+	SListPrint(phead);
+	SListErase(&phead, SListFind(phead, 8));
+	SListPrint(phead);
+	SListErase(&phead, SListFind(phead, 6));
+	SListPrint(phead);
+	SListDestroy(&phead);
+}
 int main() {
-	test4();
+	test5();
 	return 0;
 }

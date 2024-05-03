@@ -105,9 +105,52 @@ void SListEraseAfter(SListNode* pos) {
 }
 
 void SListInsert(SListNode** pphead, SListNode* pos, SLTDataType x) {
-
+	assert(pphead);
+	SListNode* cur=*pphead, * prev=*pphead;
+	if (*pphead == NULL&& pos==NULL) {
+		*pphead = BuySListNode(x);
+		(*pphead)->next = NULL;
+	}
+	else {
+		if ((*pphead)->next == NULL&&pos!=NULL) {
+			*pphead = BuySListNode(x);
+			(*pphead)->next = cur;
+		}
+		else {
+			while (cur != pos && cur != NULL) {
+				prev = cur;
+				cur = cur->next;
+			}
+			SListNode* newnode = BuySListNode(x);
+			newnode->next = cur;
+			prev->next = newnode;
+		}
+	}
 }
 
 void SListErase(SListNode** pphead, SListNode* pos) {
-
+	assert(pphead);
+	assert(*pphead);
+	assert(pos);
+	SListNode* cur = *pphead,*prev=*pphead;
+	if ((*pphead)->next == NULL) {
+		free(*pphead);
+		*pphead = NULL;
+	}
+	else {
+		if ((*pphead) == pos) {
+			cur = prev->next;
+			free(*pphead);
+			*pphead = cur;
+		}
+		else {
+			while (cur != pos && cur != NULL) {
+				prev = cur;
+				cur = cur->next;
+			}
+			cur = cur->next;
+			free(prev->next);
+			prev->next = cur;
+		}
+	}
 }

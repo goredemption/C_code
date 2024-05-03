@@ -1,6 +1,2 @@
-﻿  slist.c
-C:\Users\18247\source\repos\SingleList\SingleList\slist.c(8,3): warning C4033: “BuySListNode”必须返回值
-  test.c
-  正在生成代码...
-C:\Users\18247\source\repos\SingleList\SingleList\slist.c(12,1): warning C4715: “BuySListNode”: 不是所有的控件路径都返回值
+﻿  test.c
   SingleList.vcxproj -> C:\Users\18247\source\repos\SingleList\x64\Debug\SingleList.exe
