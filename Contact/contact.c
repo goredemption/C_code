@@ -1,5 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include "contact.h"
+
+
 int search(struct contact* ct) {
 	//check NULL pointer
 	assert(ct);
@@ -20,9 +22,21 @@ int search(struct contact* ct) {
 }
 
 void initial(struct contact* ct) {
-	ct->book = (struct address*)malloc(3 * sizeof(struct address));
+	FILE* f = fopen("data.txt", "r");
+	if (f == NULL) {
+		perror("fopen");
+		return;
+	}
+	ct->book = (struct information*)malloc(3 * sizeof(struct information));
 	ct->size = 0;
 	ct->capacity = 3;
+	while (fscanf(f, "%s %s %d %lld %s", &(ct->book[ct->size].name), &(ct->book[ct->size].sex), &(ct->book[ct->size].age),
+		&(ct->book[ct->size].number), & (ct->book[ct->size].address)) != EOF) {
+		ct->size+=1;
+		checkcapacity(ct);
+	}
+	fclose(f);
+	f = NULL;
 }
 void checkcapacity(struct contact*ct) {
 	assert(ct);
@@ -31,7 +45,7 @@ void checkcapacity(struct contact*ct) {
 			initial(ct);
 		}
 		else {
-			struct address* tmp = (struct address*)realloc(ct->book, 2 * (ct->capacity) * sizeof(struct address));
+			struct information* tmp = (struct information*)realloc(ct->book, 2 * (ct->capacity) * sizeof(struct information));
 			if (tmp != NULL) {
 				ct->book = tmp;
 				ct->capacity=2*(ct->capacity);
@@ -89,7 +103,7 @@ void find(struct contact* ct) {
 }
 
 void print(struct contact* ct) {
-	if (ct->book == NULL) {
+	if (ct->book == NULL||ct->size==0) {
 		printf("/* Book is empty */\n");
 		return;
 	}
@@ -134,12 +148,12 @@ void modify(struct contact* ct) {
 	printf("/* Modified */\n");
 }
 int compare(void* p1, void* p2) {
-	struct address* cur = (struct address*)p1;
-	struct address* next = (struct address*)p2;
+	struct information* cur = (struct information*)p1;
+	struct information* next = (struct information*)p2;
 	return strcmp(cur->name, next->name);
 }
 void sort(struct contact* ct) {
-	qsort(ct->book,ct->size,sizeof(struct address),compare);
+	qsort(ct->book,ct->size,sizeof(struct information),compare);
 }
 
 void menu() {
@@ -150,3 +164,17 @@ void menu() {
 	printf("7.Sort    0.Exit\n");
 	printf("********************************\n");
 }
+
+void DataSave(struct contact* ct) {
+	FILE* f = fopen("data.txt", "w");
+	if (f == NULL) {
+		perror("fopen");
+		return;
+	}
+	for (int i = 0; i < ct->size; i++) {
+		fprintf(f, "%s %s %d %lld %s\n", ct->book[i].name, ct->book[i].sex, ct->book[i].age, ct->book[i].number, ct->book[i].address);
+	}
+	fclose(f);
+	f = NULL;
+}
+

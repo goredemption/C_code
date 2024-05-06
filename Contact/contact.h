@@ -4,17 +4,21 @@
 #include<assert.h>
 #include<string.h>
 struct contact {
-	struct address* book;
+	struct information* book;
 	int size;
 	int capacity;
 };
-struct address {
+struct information {
 	char name[20];
-	char sex[4];
+	char sex[10];
 	int age;
 	long long number;
+	long long card;
 	char address[20];
 };
+
+void checkcapacity(struct contact* ct);
+void DataSave(struct contact* ct);
 void initial(struct contact* ct);
 void insert(struct contact* ct);
 void destroy(struct contact* ct);

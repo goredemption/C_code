@@ -58,6 +58,7 @@ int main() {
 		}
 		case 0: {
 			run = 0;
+			DataSave(&ct);
 			break;
 		}
 		default: {
