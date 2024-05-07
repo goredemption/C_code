@@ -1,0 +1,4 @@
+﻿  test.c
+C:\Users\18247\source\repos\C24_5_7\C24_5_7\test.c(50,5): warning C4047: “return”:“char **”与“char *”的间接级别不同
+C:\Users\18247\source\repos\C24_5_7\C24_5_7\test.c(54,11): warning C4047: “初始化”:“char *”与“char **”的间接级别不同
+  C24_5_7.vcxproj -> C:\Users\18247\source\repos\C24_5_7\x64\Debug\C24_5_7.exe
