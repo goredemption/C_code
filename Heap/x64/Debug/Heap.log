@@ -1,0 +1,4 @@
+﻿  heap.c
+C:\Users\18247\source\repos\Heap\Heap\heap.c(27,6): warning C4047: “=”:“HPDataType”与“HPDataType *”的间接级别不同
+C:\Users\18247\source\repos\Heap\Heap\heap.c(25,14): warning C4047: “初始化”:“HPDataType *”与“HPDataType”的间接级别不同
+  Heap.vcxproj -> C:\Users\18247\source\repos\Heap\x64\Debug\Heap.exe
