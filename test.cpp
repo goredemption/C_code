@@ -1,142 +1,176 @@
 #include<iostream>
-#include<string>
-#include<cctype>
+#include<vector>
 using namespace std;
-//string addStrings(string num1, string num2) {
-//    string result;
-//    if (num2.size() > num1.size()) {
-//        num1.swap(num2);
-//    }
-//    string::reverse_iterator it1 = num1.rbegin();
-//    string::reverse_iterator it2 = num2.rbegin();
-//    char carrier = '0';
-//    while (it1 != num1.rend()) {
-//        if (it2 == num2.rend()) {
-//            if (carrier == '1') {
-//                char tmp = *it1 + carrier - 48;
-//                if (tmp > 57) {
-//                    carrier = '1';
-//                    tmp -= 10;
+//class Solution {
+//public:
+//    int longestOnes(vector<int>& nums, int k) {
+//        int left = 0, right = 0, cnt = 0, length = 1, max = 0;
+//        while (right < nums.size()) {
+//            if (nums[right] == 0) {
+//                cnt++;
+//                if (cnt > k) {
+//                    while (left <= right) {
+//                        if (nums[left] == 0) {
+//                            left++;
+//                            cnt--;
+//                            if (cnt <= k) {
+//                                if (length > max) {
+//                                    max = length;
+//                                }
+//                                length = right - left + 1;
+//                                break;
+//                            }
+//                        }
+//                        else {
+//                            left++;
+//                        }
+//                    }
+//                    right++;
 //                }
 //                else {
-//                    carrier = '0';
+//                    right++;
+//                    length++;
 //                }
-//                result.push_back(tmp);
 //            }
 //            else {
-//                result.push_back(*it1);
+//                right++;
+//                length++;
 //            }
 //        }
-//        else {
-//            char tmp = *it1 + *it2  + carrier - 96;
-//            if (tmp > 57) {
-//                carrier = '1';
-//                tmp -= 10;
+//        return max;
+//    }
+//};
+//class Solution {
+//public:
+//    void swap(int* x1, int* x2) {
+//        int tmp = *x1;
+//        *x1 = *x2;
+//        *x2 = tmp;
+//    }
+//    void set_middle(int* left, int* right, int* middle) {
+//        if (*left > *right) {
+//            if (*right > *middle) {
+//                swap(left, right);
 //            }
 //            else {
-//                carrier = '0';
+//                if (*left > *middle) {
+//                    swap(left, middle);
+//                }
+//                //middle>left>right
+//                else {
+//                    ;
+//                }
 //            }
-//            result.push_back(tmp);
 //        }
-//        if (it2 != num2.rend()) {
-//            it1++, it2++;
-//        }
+//        //right>left
 //        else {
-//            it1++;
-//        }
-//    }
-//    if (carrier == '1') {
-//        result.push_back('1');
-//    }
-//    string tmp;
-//    string::reverse_iterator r = result.rbegin();
-//    while (r != result.rend()) {
-//        tmp.push_back(*r);
-//        r++;
-//    }
-//    return tmp;
-//}
-//int main() {
-//    string n1 = "9";
-//    string n2 = "99";
-//    cout<<addStrings(n1,n2);
-//    return 0;
-//}
-
-//int main()
-//{
-//    std::string str("This is an example sentence.");
-//    std::cout << str << '\n';
-//    // "This is an example sentence."
-//    str.erase(10, 8);                        //            ^^^^^^^^
-//    std::cout << str.size() << '\n';
-//    // "This is an sentence."
-//    str.erase(str.begin() + 9);               //           ^
-//    std::cout << str.size() << '\n';
-//    // "This is a sentence."
-//    str.erase(str.begin() + 5, str.end() - 9);  //       ^^^^^
-//    std::cout << str.size() << '\n';
-//    // "This sentence."
-//    return 0;
-//}
-
-//int firstUniqChar(string s) {
-//    string tmp(s);
-//    string::iterator cmp = tmp.begin();
-//    while (cmp != tmp.end()) {
-//        string::iterator it = cmp + 1;
-//        int cnt = 0;
-//        while (it != tmp.end()) {
-//            if (*cmp == *it) {
-//                cnt++;
-//                tmp.erase(it);
+//            if (*left > *middle) {
+//                ;
 //            }
 //            else {
-//                it++;
+//                if (*right > *middle) {
+//                    swap(left, middle);
+//                }
+//                else {
+//                    //middle>right>left
+//                    swap(left, right);
+//                }
 //            }
 //        }
-//        if (cnt > 0) {
-//            tmp.erase(cmp);
+//    }
+//    int singlepass(vector<int>& nums, int left, int right) {
+//        set_middle(&nums[left], &nums[right], &nums[(left + right) / 2]);
+//        int key = nums[left];
+//        int key_index = left;
+//        while (left < right) {
+//            while (right > left && nums[right] >= key) {
+//                right--;
+//            }
+//            while (left < right && nums[left] <= key) {
+//                left++;
+//            }
+//            swap(&nums[left], &nums[right]);
 //        }
-//        else {
-//            return s.find(*cmp);
+//        swap(&nums[left], &nums[key_index]);
+//        return left;
+//    }
+//    void quicksort(vector<int>& nums, int left, int right) {
+//        int key = singlepass(nums, left, right);
+//        if (key - left > 1) {
+//            quicksort(nums, left, key - 1);
+//        }
+//        if (right - key > 1) {
+//            quicksort(nums, key + 1, right);
 //        }
 //    }
-//    return -1;
-//}
-
-//int main() {
-//    string s = "dddccdbba";
-//    cout<<firstUniqChar(s);
-//    return 0;
-//}
-
-bool isPalindrome(string s) {
-	string::iterator it = s.begin();
-	while (it != s.end()) {
-		if ((*it > 47 && *it < 58) || (*it > 64 && *it < 91) || (*it > 96 && *it < 123)) {
-			*it=tolower(*it);
-			it++;
-		}
-		else {
-			s.erase(it);
-		}
-	}
-	int front=0;
-	int back = s.size()-1;
-	while (front < back) {
-		if (s[front] == s[back]) {
-			front++, back--;
-		}
-		else {
-			return false;
-		}
-	}
-	return true;
-}
-
+//    int minSubArrayLen(int target, vector<int>& nums) {
+//        quicksort(nums, 0, nums.size() - 1);
+//        int length = 0, sum = 0;
+//        int right = nums.size() - 1;
+//        while (sum < target) {
+//            sum += nums[right];
+//            right--;
+//            length++;
+//        }
+//        return length;
+//    }
+//};
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int length = 0;
+        for (int i = 0; i < s.size(); i++) {
+            string tmp;
+            tmp.push_back(s[i]);
+            int cnt = 1;
+            for (int j = i + 1; j < s.size(); j++) {
+                int valid = 1;
+                for (auto ch : tmp) {
+                    if (ch == s[j]) {
+                        valid = 0;
+                        break;
+                    }
+                }
+                if (valid) {
+                    tmp.push_back(s[j]);
+                    cnt++;
+                }
+                else {
+                    if (cnt > length) {
+                        length = cnt;
+                    }
+                    break;
+                }
+            }
+        }
+        return length;
+    }
+};
 int main() {
-	string s = "A man, a plan, a canal: Panama";
-	cout<<isPalindrome(s);
-	return 0;
+    /*Solution test;
+    int a[] = { 0,0,1,1,1,0,0 };
+    vector<int> nums;
+    nums.push_back(0);
+    nums.push_back(0);
+    nums.push_back(1);
+    nums.push_back(1);
+    nums.push_back(1);
+    nums.push_back(0);
+    nums.push_back(0);
+    test.longestOnes(nums, 0);*/
+    /*Solution test;
+    int target = 7;
+    vector<int> nums;
+    nums.push_back(2);
+    nums.push_back(3);
+    nums.push_back(1);
+    nums.push_back(2);
+    nums.push_back(4);
+    nums.push_back(3);
+    test.minSubArrayLen(target, nums);*/
+    Solution test;
+    string s1("jbpnbwwd");
+    cout<<s1.size();
+    test.lengthOfLongestSubstring(s1);
+    return 0;
 }
